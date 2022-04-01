@@ -22,16 +22,17 @@ export class SensorTemperatureService {
         return savedReading.save();
     }
 
-    //This method calls every minute's 45th second
-    @Cron('45 * * * * *')
+    //This method calls every minute's 15th and 45th second
+    @Cron('15,45 * * * * *')
     async listenToCronJob(): Promise<any>{
-        this.logger.debug('Cron job started when current second is 45');
+        this.logger.debug('Cron job started');
         const cronObject: TemperatureSensorCreateDto  = {
+            sensorId: '2',
             roomId: Number((Math.random()*10).toFixed(0)),
-            devicePosition: DevicePosition.IN,
+            devicePosition: DevicePosition.OUT,
             temperature: Number((Math.random()*100).toFixed(2)),
         }
         await this.syncToDb(cronObject);
-        this.logger.debug('Cron job end when current second is 45');
+        this.logger.debug('Cron job end');
     }
 }

@@ -9,6 +9,9 @@ export class TemperatureSensor {
   _id: string;
 
   @Prop()
+  sensorId: string;
+
+  @Prop()
   roomId: number;
 
   @Prop()
